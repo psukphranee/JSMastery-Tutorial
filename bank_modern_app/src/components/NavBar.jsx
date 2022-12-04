@@ -20,12 +20,17 @@ const NavBar = () => {
             (nav, index) => (
               <li
                 key={nav.id}
-                className={`font-poppins font-normal cursor-pointer text-[16px] text-white ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}`}
+                className={`
+                  font-poppins font-normal cursor-pointer text-[16px] text-white 
+                  ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}
+                  ${nav.title === active ? 'text-white' : 'text-dimWhite' }
+                  `}
+                onClick={ () => setActive(nav.title) }
                 >
-                  <a href={`#${navLinks.id}`}>
+                  <a href={`#${navLinks.id}`} >
                     {nav.title}
                   </a>
-                </li>
+              </li>
             )
           )
         }
@@ -33,6 +38,7 @@ const NavBar = () => {
 
       {/* mobile navbar */}
       <div className='sm:hidden flex flex-1 justify-end items-center'>
+
         <img src={toggle ? close : menu} 
         alt="menu"
         className="w-[28px] h-[28px] object-contain" 
@@ -44,7 +50,7 @@ const NavBar = () => {
               ${
                 toggle ? 'flex' : 'hidden' 
               } 
-              right-0 top-20 absolute min-w-[140px] mx-6 p-6
+              right-0 top-20 absolute min-w-[140px]  p-6 w-full
               rounded-xl bg-black-gradient 
               sidebar
               `} >
@@ -58,9 +64,16 @@ const NavBar = () => {
                 (nav, index) => (
                   <li
                     key={nav.id}
-                    className={`px-2 py-1 my-2 border font-poppins font-normal cursor-pointer text-[16px] text-white ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}`}
+                    className={`
+                      ${active === nav.title ? 'text-white' : 'text-dimWhite'}
+                      ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}
+                      px-2 py-1 my-2 cursor-pointer 
+                      font-poppins font-normal text-[16px] text-white 
+                      `}
+                    onClick={ () => setActive(nav.title) }
                     >
-                      <a href={`#${navLinks.id}`}>
+                      <a href={`#${navLinks.id}`}
+                          >
                         {nav.title}
                       </a>
                     </li>
