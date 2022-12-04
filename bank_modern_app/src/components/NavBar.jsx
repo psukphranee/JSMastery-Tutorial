@@ -7,6 +7,7 @@ const NavBar = () => {
 
 
   const [toggle, setToggle] = useState(false);
+  const [active, setActive] = useState("Home");
 
   return (
     <nav className='w-full flex justify-between items-center navbar py-6'>
@@ -38,21 +39,35 @@ const NavBar = () => {
         onClick={() => setToggle((prev) => (!prev))}
         />
 
-        <div className='w-full' >
-          {
-            navLinks.map(
-              (nav, index) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-normal cursor-pointer text-[16px] text-white ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}`}
-                  >
-                    <a href={`#${navLinks.id}`}>
-                      {nav.title}
-                    </a>
-                  </li>
+        {/* render list items */}
+        <div className={`
+              ${
+                toggle ? 'flex' : 'hidden' 
+              } 
+              right-0 top-20 absolute min-w-[140px] mx-6 p-6
+              rounded-xl bg-black-gradient 
+              sidebar
+              `} >
+          <ul className='
+                    flex flex-col flex-1
+                    px-4 py-2
+                    list-none
+                    '>
+            {
+              navLinks.map(
+                (nav, index) => (
+                  <li
+                    key={nav.id}
+                    className={`px-2 py-1 my-2 border font-poppins font-normal cursor-pointer text-[16px] text-white ${index === (navLinks.length - 1) ? 'mr-0' : 'mr-10'}`}
+                    >
+                      <a href={`#${navLinks.id}`}>
+                        {nav.title}
+                      </a>
+                    </li>
+                )
               )
-            )
-          }
+            }
+          </ul>
         </div>
       </div>
 
